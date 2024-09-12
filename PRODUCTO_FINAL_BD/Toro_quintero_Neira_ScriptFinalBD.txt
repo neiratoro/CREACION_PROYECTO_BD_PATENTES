@@ -1,0 +1,345 @@
+
+    ----- CREACION BASE DE DATOS Y TABLAS ----  
+
+-- Crear base de datos---
+CREATE DATABASE ProductPatent;
+USE ProductPatent;
+
+---- Tabla de Inventores----
+
+CREATE TABLE Inventor (
+    IdInventor VARCHAR(15) PRIMARY KEY,
+    InventorName VARCHAR(100)  NULL,
+    InventorAddress VARCHAR(255)  NULL,
+    Phone VARCHAR(20)  NULL
+);
+
+---- Tabla de Patentes----
+
+CREATE TABLE Patent (
+    IdPatent VARCHAR(15) PRIMARY KEY,
+    InventName VARCHAR(255) NOT NULL,
+    BuyDate DATE NULL,
+    IdInventor VARCHAR(15),
+    FOREIGN KEY (IdInventor) REFERENCES Inventor(IdInventor)
+);
+
+---- Tabla de Ayudantes---
+
+CREATE TABLE AssistantInventors (
+    IdAssistant VARCHAR(15) PRIMARY KEY,
+    AssistantName VARCHAR(100) NOT NULL,
+    AssistantAddress VARCHAR(255) NULL,
+    Phone VARCHAR(20) NULL,
+    IdInventor VARCHAR(15),
+    FOREIGN KEY (IdInventor) REFERENCES Inventor(IdInventor)
+);
+
+----- Tabla de Empresas-----
+CREATE TABLE Company (
+    IdCompany VARCHAR(15) PRIMARY KEY,
+    CompanyName VARCHAR(100)  NULL,
+    CompanyAddres VARCHAR(255),
+    Phone VARCHAR(100)
+);
+
+----- Tabla de Compra de Patentes----
+CREATE TABLE BuyPatent (
+    IdPatent VARCHAR(15),
+    IdCompany VARCHAR(15),
+    BuyDate DATE NOT NULL,
+    PRIMARY KEY (IdPatent, IdCompany),
+    FOREIGN KEY (IdPatent) REFERENCES Patent(IdPatent),
+    FOREIGN KEY (IdCompany) REFERENCES Company(IdCompany)
+);
+
+---- Tabla de Contratacion de Inventores----
+CREATE TABLE HiringInventor (
+    IdPatent VARCHAR(15),
+    IdCompany VARCHAR(15),
+    IdInventor VARCHAR(15),
+    HiringDate DATE NOT NULL,
+    PRIMARY KEY (IdPatent, IdCompany, IdInventor),
+    FOREIGN KEY (IdPatent) REFERENCES Patent(IdPatent),
+    FOREIGN KEY (IdPatent) REFERENCES Company(IdCompany),
+    FOREIGN KEY (IdInventor) REFERENCES Inventor(IdInventor)
+);
+
+---- Tabla de Contratacion de Ayudantes----
+CREATE TABLE HiringAssistant (
+    IdAssistant VARCHAR(15),
+    IdCompany VARCHAR(15),
+    HiringDate DATE NOT NULL,
+    PRIMARY KEY (IdAssistant, IdCompany),
+    FOREIGN KEY (IdAssistant) REFERENCES AssistantInventors(idAssistant),
+    FOREIGN KEY (IdCompany) REFERENCES Company(IdCompany)
+);
+ 
+
+/*INSERTAR DATOS A LA BASE DE DATOS: ProductPatent*/
+
+	   ----TABLE PATENT ---
+
+INSERT INTO Patent ( IdPatent, InventName, BuyDate)
+VALUES ('1A', 'AIDSvaccine', '2000-04-01');
+INSERT INTO Patent ( IdPatent, InventName, BuyDate)
+VALUES ('1B', 'COVIDvaccine', '2001-04-01');
+INSERT INTO Patent ( IdPatent, InventName, BuyDate)
+VALUES ('1C', 'VIHvaccine', '2002-04-01');
+INSERT INTO Patent ( IdPatent, InventName, BuyDate)
+VALUES ('1D', 'SIFILISvaccine', '2004-04-01');
+INSERT INTO Patent ( IdPatent, InventName, BuyDate)
+VALUES ('1E', 'GONOvaccine', '2005-04-01');
+
+     -- TABLA INVENTORES
+
+INSERT INTO Inventor (IdInventor, InventorName, InventorAddress, Phone)
+VALUES ( '0001', 'Carlos_Munera', 'Clle37nro37-110', '45454');
+INSERT INTO Inventor (IdInventor, InventorName, InventorAddress, Phone)
+VALUES ( '0002', 'Federico_Velez', 'Cra14nro37-120', '545-87-85');
+INSERT INTO Inventor (IdInventor, InventorName, InventorAddress, Phone)
+VALUES ( '0003', 'Juan_Cardenas', 'Clle38nro45-110', '321-42-52');
+INSERT INTO Inventor (IdInventor, InventorName, InventorAddress, Phone)
+VALUES ( '0004', 'Maria_Rivas', 'Clle24nro38-120', '341-45-45');
+INSERT INTO Inventor (IdInventor, InventorName, InventorAddress, Phone)
+VALUES ( '0005', 'Eliana_Sanchez', 'Clle37nro37-110', '645-56-56');
+INSERT INTO Inventor (IdInventor, InventorName, InventorAddress, Phone)
+VALUES ( '0006', 'Jesusa_Loaiza', 'Clle78nro37-20', '645-57-57');
+INSERT INTO Inventor (IdInventor, InventorName, InventorAddress, Phone)
+VALUES ( '0007', 'Eliza_Guerra', 'Clle27nro78-112', '784-58-56');
+INSERT INTO Inventor (IdInventor, InventorName, InventorAddress, Phone)
+VALUES ( '0008', 'Jessy_Sanchez', 'Clle78nro78-70', '789-56-78');
+INSERT INTO Inventor (IdInventor, InventorName, InventorAddress, Phone)
+VALUES ( '0009', 'Yeisy_Toro', 'Clle71nro91-40', '325-78-56');
+INSERT INTO Inventor (IdInventor, InventorName, InventorAddress, Phone)
+VALUES ( '0010', 'Morena_Suaza', 'Clle72nro89-10', '125-74-578');
+INSERT INTO Inventor (IdInventor, InventorName, InventorAddress, Phone)
+VALUES ( '0011', 'Sarilla_Soto', 'Clle72nro89-10', '125-74-578');
+INSERT INTO Inventor (IdInventor, InventorName, InventorAddress, Phone)
+VALUES ( '0012', 'Norena_Suaza', 'Clle72nro89-10', '125-74-578');
+INSERT INTO Inventor (IdInventor, InventorName, InventorAddress, Phone)
+VALUES ( '0013', 'Carmen_Mejia', 'Clle72nro89-10', '125-74-578');
+INSERT INTO Inventor (IdInventor, InventorName, InventorAddress, Phone)
+VALUES ( '0014', 'Omaira_Suaza', 'Clle72nro89-10', '125-74-578');
+INSERT INTO Inventor (IdInventor, InventorName, InventorAddress, Phone)
+VALUES ( '0015', 'Ian_Usme', 'Clle72nro89-10', '125-74-578');
+INSERT INTO Inventor (IdInventor, InventorName, InventorAddress, Phone)
+VALUES ( '0016', 'Rosana_Caro', 'Clle72nro89-10', '125-74-578');
+INSERT INTO Inventor (IdInventor, InventorName, InventorAddress, Phone)
+VALUES ( '0017', 'Mauroa_Calix', 'Clle72nro89-10', '125-74-658');
+INSERT INTO Inventor (IdInventor, InventorName, InventorAddress, Phone)
+VALUES ( '0018', 'Marija_Toro', 'Clle72nro89-10', '125-74-879');
+INSERT INTO Inventor (IdInventor, InventorName, InventorAddress, Phone)
+VALUES ( '0019', 'Caroa_Ruisa', 'Clle72nro89-10', '125-74-821');
+INSERT INTO Inventor (IdInventor, InventorName, InventorAddress, Phone)
+VALUES ( '0020', 'Sorany_Alvsa', 'Clle72nro89-10', '125-74-659');
+INSERT INTO Inventor (IdInventor, InventorName, InventorAddress, Phone)
+VALUES ( '0021', 'Risana_Suaza', 'Clle72nro89-10', '125-74-578');
+INSERT INTO Inventor (IdInventor, InventorName, InventorAddress, Phone)
+VALUES ( '0022', 'Sorena_Cajca', 'Clle72nro89-10', '125-74-578');
+INSERT INTO Inventor (IdInventor, InventorName, InventorAddress, Phone)
+VALUES ( '0023', 'Carina_Suria', 'Clle72nro89-10', '125-74-578');
+INSERT INTO Inventor (IdInventor, InventorName, InventorAddress, Phone)
+VALUES ( '0024', 'Isaena_Sabca', 'Clle72nro89-10', '125-74-578');
+INSERT INTO Inventor (IdInventor, InventorName, InventorAddress, Phone)
+VALUES ( '0025', 'Sarisa_Toroa', 'Clle72nro89-10', '125-74-578');
+
+
+     --TABLA AYUDANTES-----
+
+INSERT INTO AssistantInventors (IdAssistant, AssistantName, AssistantAddress, Phone)
+VALUES ('001', 'Alvaro_Ruiz', 'cll44-nro31-130','654-45-45');
+INSERT INTO AssistantInventors (IdAssistant, AssistantName, AssistantAddress, Phone)
+VALUES ('002', 'Ana_Rios', 'cll45-nro36-14', 654-45-45);
+INSERT INTO AssistantInventors (IdAssistant, AssistantName, AssistantAddress, Phone)
+VALUES ('003', 'Diana_Mejia', 'cll334-nro36-110', 654-45-65);
+INSERT INTO AssistantInventors (IdAssistant, AssistantName, AssistantAddress, Phone)
+VALUES ('004', 'Juano_Caro', 'cll45-nro38-170', 654-45-45);
+INSERT INTO AssistantInventors (IdAssistant, AssistantName, AssistantAddress, Phone)
+VALUES ('005', 'Sara_Cano', 'cll54-nro21-10','654-45-45');
+INSERT INTO AssistantInventors (IdAssistant, AssistantName, AssistantAddress, Phone)
+VALUES ('006', 'Mara_Cano', 'cll54-nro21-10','654-45-48');
+INSERT INTO AssistantInventors (IdAssistant, AssistantName, AssistantAddress, Phone)
+VALUES ('007', 'Cary_Mazo', 'cll54-nro21-10','654-45-45');
+INSERT INTO AssistantInventors (IdAssistant, AssistantName, AssistantAddress, Phone)
+VALUES ('008', 'Sara_Cano', 'cll54-nro21-10','654-45-45');
+INSERT INTO AssistantInventors (IdAssistant, AssistantName, AssistantAddress, Phone)
+VALUES ('009', 'Samu_Riiz', 'cll54-nro21-10','654-45-46');
+INSERT INTO AssistantInventors (IdAssistant, AssistantName, AssistantAddress, Phone)
+VALUES ('010', 'Alvaro_Ruiz', 'cll44-nro31-130','654-45-78');
+INSERT INTO AssistantInventors (IdAssistant, AssistantName, AssistantAddress, Phone)
+VALUES ('011', 'Alvaro_Ruiz', 'cll44-nro31-130','654-45-45');
+INSERT INTO AssistantInventors (IdAssistant, AssistantName, AssistantAddress, Phone)
+VALUES ('012', 'Sarita_Mara', 'cll44-nro31-130','654-45-55');
+INSERT INTO AssistantInventors (IdAssistant, AssistantName, AssistantAddress, Phone)
+VALUES ('013', 'Samuo_Mazo', 'cll44-nro31-130','654-45-45');
+INSERT INTO AssistantInventors (IdAssistant, AssistantName, AssistantAddress, Phone)
+VALUES ('014', 'Sabina_Ruiz', 'cll44-nro31-130','654-45-44');
+INSERT INTO AssistantInventors (IdAssistant, AssistantName, AssistantAddress, Phone)
+VALUES ('015', 'Savaro_Muño', 'cll44-nro31-130','654-45-64');
+INSERT INTO AssistantInventors (IdAssistant, AssistantName, AssistantAddress, Phone)
+VALUES ('016', 'Saravo_Carz', 'cll44-nro31-130','654-45-45');
+INSERT INTO AssistantInventors (IdAssistant, AssistantName, AssistantAddress, Phone)
+VALUES ('017', 'Safiro_Ruiz', 'cll44-nro31-130','654-45-54');
+INSERT INTO AssistantInventors (IdAssistant, AssistantName, AssistantAddress, Phone)
+VALUES ('018', 'Savino_Mizi', 'cll44-nro31-130','654-45-54');
+INSERT INTO AssistantInventors (IdAssistant, AssistantName, AssistantAddress, Phone)
+VALUES ('019', 'Carmen_Sumi', 'cll44-nro31-130','654-45-87');
+INSERT INTO AssistantInventors (IdAssistant, AssistantName, AssistantAddress, Phone)
+VALUES ('020', 'Alvaro_Ruiz', 'cll44-nro31-130','654-45-45');
+
+
+     --TABLA EMPRESAS----
+
+INSERT INTO Company ( IdCompany, CompanyName, CompanyAddres, Phone)
+VALUES ('01','SURASEGUROS', 'CR34-NRO36-20', '544-95-45');
+INSERT INTO Company ( IdCompany, CompanyName, CompanyAddres, Phone)
+VALUES ('02','BANCOBBVA', 'CR45-NRO67-10', '487-45-46');
+INSERT INTO Company ( IdCompany, CompanyName, CompanyAddres, Phone)
+VALUES ('03','BAGRARIO', 'CR64-NRO45-78', '789-45-45');
+INSERT INTO Company ( IdCompany, CompanyName, CompanyAddres, Phone)
+VALUES ('04','EPSSANITAS', 'CR98-NRO78-49', '678-45-78');
+INSERT INTO Company ( IdCompany, CompanyName, CompanyAddres, Phone)
+VALUES ('05','BANCOHABI', 'CR64-NRO45-46', '456-45-78');
+INSERT INTO Company ( IdCompany, CompanyName, CompanyAddres, Phone)
+VALUES ('06','BANCOHABI', 'CR64-NRO45-46', '456-45-71');
+INSERT INTO Company ( IdCompany, CompanyName, CompanyAddres, Phone)
+VALUES ('07','BANCOHABI', 'CR64-NRO45-46', '456-45-71');
+INSERT INTO Company ( IdCompany, CompanyName, CompanyAddres, Phone)
+VALUES ('08','BANCOHABI', 'CR64-NRO45-46', '456-45-73');
+INSERT INTO Company ( IdCompany, CompanyName, CompanyAddres, Phone)
+VALUES ('09','BANCOHABI', 'CR64-NRO45-46', '456-45-75');
+INSERT INTO Company ( IdCompany, CompanyName, CompanyAddres, Phone)
+VALUES ('10','BANCOHABI', 'CR64-NRO45-46', '456-45-76');
+INSERT INTO Company ( IdCompany, CompanyName, CompanyAddres, Phone)
+VALUES ('11','bbvaOHABI', 'CR64-NRO45-46', '456-45-73');
+INSERT INTO Company ( IdCompany, CompanyName, CompanyAddres, Phone)
+VALUES ('12','EPSSOHABI', 'CR64-NRO45-46', '456-45-12');
+INSERT INTO Company ( IdCompany, CompanyName, CompanyAddres, Phone)
+VALUES ('13','BANCOHABI', 'CR64-NRO45-47', '456-45-47');
+INSERT INTO Company ( IdCompany, CompanyName, CompanyAddres, Phone)
+VALUES ('14','BANCOHABI', 'CR64-NRO45-56', '456-45-56');
+INSERT INTO Company ( IdCompany, CompanyName, CompanyAddres, Phone)
+VALUES ('15','EPSSAVIAI', 'CR64-NRO45-41', '456-45-78');
+INSERT INTO Company ( IdCompany, CompanyName, CompanyAddres, Phone)
+VALUES ('16','BANCOHABI', 'CR64-NRO45-37', '456-45-57');
+INSERT INTO Company ( IdCompany, CompanyName, CompanyAddres, Phone)
+VALUES ('17','BANCOHABI', 'CR64-NRO45-76', '456-45-74');
+INSERT INTO Company ( IdCompany, CompanyName, CompanyAddres, Phone)
+VALUES ('19','BANCOHABI', 'CR64-NRO45-42', '456-45-65');
+INSERT INTO Company ( IdCompany, CompanyName, CompanyAddres, Phone)
+VALUES ('20','BANCONACI', 'CR64-NRO45-96', '456-45-39');
+
+
+
+     ----CONSULTAS A LA BASE DE DATOS -----
+
+USE ProductPatent 
+GO
+
+SELECT * FROM Inventor
+
+SELECT TOP 3  IdCompany,CompanyName,CompanyAddres
+FROM Company
+ORDER BY IdCompany
+
+SELECT*
+FROM Company
+WHERE CompanyName
+IN('BANCOAVH')
+
+
+SELECT* FROM Inventor
+WHERE IdInventor
+LIKE '%M%';
+
+SELECT* FROM Inventor
+WHERE IdInventor
+LIKE 'J%';
+
+SELECT* FROM Inventor
+WHERE IdInventor
+LIKE 'A%'
+
+SELECT IdPatent, InventName FROM Patent 
+
+SELECT TOP 1  IdCompany,CompanyName,CompanyAddres
+FROM Company
+ORDER BY IdCompany
+
+SELECT * FROM Inventor
+ORDER BY InventorName ASC;
+
+SELECT *
+FROM Patent
+
+SELECT*
+FROM Company
+WHERE CompanyName
+IN('EPSSANITAS')
+
+SELECT* FROM Inventor
+WHERE InventorName
+LIKE '%_a';
+
+SELECT* FROM Inventor
+WHERE InventorName
+LIKE 'J__%'
+
+
+----- Consultas de agrupamiento y funciones de agregación -----
+
+SELECT InventorName, IdInventor
+FROM Inventor
+GROUP BY InventorName, IdInventor; 
+
+SELECT COUNT(*) 'total_registros'
+FROM Patent
+
+SELECT IdPatent, COUNT(IdPatent) AS TotalRegistros
+FROM Patent
+GROUP BY IdPatent 
+HAVING COUNT(IdPatent) > 5;
+
+SELECT IdCompany, COUNT(Idcompany) AS Totalregistros
+FROM Company
+GROUP BY IdCompany;
+
+SELECT InventorName, COUNT(*) AS cantiadad_inventores
+FROM Inventor 
+GROUP BY InventorName;
+
+SELECT CompanyName, IdCompany, MIN(IdCompany) AS minimoId
+FROM Company
+GROUP BY CompanyName, IdCompany
+ORDER BY CompanyName, IdCompany;
+
+SELECT InventorName, idInventor, max(IdInventor) AS MaximoId
+FROM Inventor
+GROUP BY InventorName, IdInventor
+ORDER BY InventorName, IdInventor ASC
+
+
+--  CONSULTA ENTRE TABLAS --
+
+SELECT Inventor.IdInventor AS Cedula_inventor, 
+Patent.InventName, Inventor.InventorName
+FROM Inventor
+INNER JOIN Patent ON Inventor.IdInventor = Patent.IdInventor 
+
+SELECT Inventor.IdInventor AS Cedula_inventor, 
+Patent.InventName, Inventor.InventorName
+FROM Inventor
+LEFT JOIN Patent ON Inventor.IdInventor = Patent.IdInventor 
+
+SELECT Inventor.IdInventor AS Cedula_inventor, 
+Patent.InventName, Inventor.InventorName
+FROM Inventor
+RIGHT JOIN Patent ON Inventor.IdInventor = Patent.IdInventor
+INNER JOIN BuyPatent ON  Patent.IdPatent = BuyPatent.IdPatent
+
+SELECT Inventor.IdInventor AS Cedula_inventor, 
+Patent.InventName, Inventor.InventorName
+FROM Inventor
+FULL OUTER JOIN Patent ON Inventor.IdInventor = Patent.IdInventor 
+
